@@ -1,3 +1,5 @@
+import { IReservation } from './reservation.interface';
+
 export interface IReservationState {
-    value: string[]
+    value: IReservation[];
 }
