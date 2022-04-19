@@ -1,15 +1,17 @@
 import { FC, useState, ChangeEvent } from 'react';
 import { ICustomer } from '../../interfaces/customer.interface';
-import './CustomerCard.css';
 import { useDispatch } from 'react-redux';
 import { addCustomerItem } from '../../features/customer/customerSlice';
+import Card from '../../styleds/Card.styled';
+import CardTitle from '../../styleds/CardTitle.styled';
+import InputStyled from '../../styleds/Input.styled';
 
 const CustomerCard: FC<{customer: ICustomer}> = ({ customer }) => {
     const dispatch = useDispatch();
     const [item, setItem] = useState<string>('');
 
-    const handleAddItem = (): void => {
-        if (item.length === 0) return;
+    const handleAddItem = (e: any): void => {
+        if (item.length === 0 || e.key !== 'Enter') return;
         dispatch(addCustomerItem({
             customerId: customer.id,
             itemName: item,
@@ -18,27 +20,33 @@ const CustomerCard: FC<{customer: ICustomer}> = ({ customer }) => {
     }
 
     return (
-        <div 
-            className="customer-food-card-container" 
+        <Card
             key={ customer.id }
             data-testid={ `CustomerCard-${ customer.id }` }
         >
-            <p>{ customer.name }</p>
-            <div className="customer-foods-container">
-                <div className="customer-food" key={ `food-${customer.id}` }>
-                    {customer.items.map((item: string, index: number) => <p data-testid="customer-items" key={ `item-${index}` }>{ item }</p>)}
+            <CardTitle>{ customer.name }</CardTitle>
+            <div>
+                <div className='flex flex-row flex-wrap' key={ `food-${customer.id}` }>
+                    {customer.items.map((item: string, index: number) => (
+                        <div className='px-1 py-1 bg-slate-400 text-white rounded-md mr-2 mb-2'>
+                            <p
+                                data-testid="customer-items" 
+                                key={ `item-${index}` }
+                            >{ item }</p>
+                        </div>
+                    ))}
                 </div>
-                <div className="customer-food-input-container">
-                    <input 
+                <div className='w-2/4 mr-0 ml-auto'>
+                    <InputStyled 
                         type="text"
                         value={ item }
-                        placeholder="add food"
+                        placeholder="enter to add food"
                         onChange={ (e: ChangeEvent<HTMLInputElement>) => setItem(e.target.value) }
+                        onKeyDown={handleAddItem}
                     />
-                    <button data-testid="add-item" onClick={ handleAddItem } >Add</button>
                 </div>
             </div>
-        </div>
+        </Card>
     )
 }
 

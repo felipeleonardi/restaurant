@@ -1,9 +1,10 @@
 import { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addReservation } from '../../features/reservation/reservationSlice';
-import './ReservationInput.css';
 import { IReservation } from './../../interfaces/reservation.interface';
 import { addCustomer } from '../../features/customer/customerSlice';
+import InputStyled from '../../styleds/Input.styled';
+import ButtonStyled from '../../styleds/Button.styled';
 
 const ReservationInput = () => {
     const dispatch = useDispatch();
@@ -26,14 +27,16 @@ const ReservationInput = () => {
     
     return (
         <div 
-            className="reservation-input-container" 
+            className="w-full py-2" 
             data-testid="reservation-input"
         >
-            <input 
+            <InputStyled
+                type="text"
+                placeholder='name of the client'
                 value={ reservation.name }
                 onChange={ (e: ChangeEvent<HTMLInputElement>) => setReservation({...reservation, name: e.target.value}) }
             />
-            <button onClick={handleAddReservations}>Add</button>
+            <ButtonStyled onClick={handleAddReservations}>Add</ButtonStyled>
         </div>
     )
 }

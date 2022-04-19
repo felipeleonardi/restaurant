@@ -1,17 +1,13 @@
 import ReservationList from '../ReservationList/ReservationList';
 import ReservationInput from './../ReservationInput/ReservationInput';
-import './style.css';
+import ReservationWrapper from './../../styleds/ReservationWrapper.style';
 
 const ReservationContainer = () => {
-
     return (
-        <div className="reservation-container">
-            <div>
-                <h5 className="reservation-header">Reservations</h5>
-                <ReservationList />
-            </div>
+        <ReservationWrapper>
             <ReservationInput />
-        </div>
+            <ReservationList />
+        </ReservationWrapper>
     )
 }
 
