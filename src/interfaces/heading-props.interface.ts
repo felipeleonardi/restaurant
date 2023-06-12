@@ -1,3 +1,3 @@
 export interface IHeadingProps {
-    textWhite?: boolean;
+	$textWhite: boolean;
 }

@@ -28,7 +28,7 @@ const CustomerCard: FC<{customer: ICustomer}> = ({ customer }) => {
             <div>
                 <div className='flex flex-row flex-wrap' key={ `food-${customer.id}` }>
                     {customer.items.map((item: string, index: number) => (
-                        <div className='px-1 py-1 bg-slate-400 text-white rounded-md mr-2 mb-2'>
+                        <div className='px-1 py-1 bg-slate-400 text-white rounded-md mr-2 mb-2' key={index}>
                             <p
                                 data-testid="customer-items" 
                                 key={ `item-${index}` }
