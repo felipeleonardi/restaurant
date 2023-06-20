@@ -1,0 +1,17 @@
+name: Only for execute tests
+
+on:
+  push:
+    branches: ["tests"]
+
+jobs:
+  test-commands:
+    name: Check Java version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check version
+        run: java -version
