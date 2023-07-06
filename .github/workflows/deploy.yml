@@ -8,13 +8,19 @@ jobs:
   deploy:
     name: Setup Docker Image
     runs-on: ubuntu-latest
+    
+    container:
+      image: dockette/nodejs
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Run NodeJs Image
-        run: docker run -i -t dockette/nodejs /bin/sh
+      #- name: Run NodeJs Image
+       # run: docker run -i -t dockette/nodejs /bin/sh
+       
+      - name: Check containers
+        run: docker ps
       
       - name: Check NodeJs version
         run: node --version
