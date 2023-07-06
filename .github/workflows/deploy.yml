@@ -1,50 +1,24 @@
-name: Docker Image CI to GCP
+name: Docker Image Test
 
 on:
   push:
-    branches: ["master"]
-
-env:
-  PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
-  REGION: us-east1
-  # project-name but it can be anything you want
-  REPO_NAME: restaurant
+    branches: ["feat/test-docker"]
 
 jobs:
   deploy:
-    name: Setup GCloud Account
+    name: Setup Docker Image
     runs-on: ubuntu-latest
-    environment: gcp-prod
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Authenticate with Google Cloud
-      - id: "auth"
-        uses: "google-github-actions/auth@v0"
-        with:
-          credentials_json: "${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT }}"
+      - name: Run NodeJs Image
+        run: docker run -i -t dockette/nodejs /bin/sh
+      
+      - name: Check NodeJs version
+        run: node --version
+        
+      - name: Quit container
+        run: quit
 
-      # Setup gcloud CLI/SDK
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0
-
-      - name: Authorize Docker push
-        run: gcloud auth configure-docker
-
-      - name: Build and tag the docker image
-        run: |-
-          docker build . --tag gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
-
-      - name: Push the image to the Google Container Registry (GCR)
-        run: |-
-          docker push gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
-
-      - name: Deploy
-        run: |-
-          gcloud run deploy $REPO_NAME \
-          --region $REGION \
-          --image gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
-          --platform "managed" \
-          --quiet
