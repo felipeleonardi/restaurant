@@ -8,6 +8,7 @@ jobs:
   deploy:
     name: Setup Docker Image
     runs-on: ubuntu-latest
+    container: dockette/nodejs
 
     steps:
       - name: Checkout
@@ -18,12 +19,9 @@ jobs:
        
        
       - name: Run the build process with Docker
-        uses: addnab/docker-run-action@v3
-        with:
-          image: dockette/nodejs
-          run: |
-                node --version
-                npm --version
+        run: |
+              node --version
+              npm --version
         
       
       #- name: Check NodeJs version
