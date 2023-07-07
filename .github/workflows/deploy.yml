@@ -12,18 +12,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      #- name: Run NodeJs Image
-       # run: docker run -i -t dockette/nodejs /bin/sh
-       
-       
-      - name: Run the build process with Docker
-        #uses: addnab/docker-run-action@v3
         with:
           image: dockette/nodejs
           run: |
                 node --version
                 npm --version
+
+      #- name: Run NodeJs Image
+       # run: docker run -i -t dockette/nodejs /bin/sh
+       
+       
+#       - name: Run the build process with Docker
+        #uses: addnab/docker-run-action@v3
+#         with:
+#           image: dockette/nodejs
+#           run: |
+#                 node --version
+#                 npm --version
         
       
       #- name: Check NodeJs version
