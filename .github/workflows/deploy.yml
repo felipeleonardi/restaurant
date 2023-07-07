@@ -12,11 +12,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-
-      #- name: Run NodeJs Image
-       # run: docker run -i -t dockette/nodejs /bin/sh
-       
+        uses: actions/checkout@v3  
        
       - name: Run the build process with Docker
         run: |
@@ -24,9 +20,7 @@ jobs:
               npm --version
         
       
-      #- name: Check NodeJs version
-        #run: node --version
+      - name: Check list of directories
+        run: ls -la
         
-     # - name: Quit container
-       # run: quit
 
