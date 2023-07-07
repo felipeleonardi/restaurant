@@ -24,7 +24,9 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: dockette/nodejs
-          run: node --version
+          run: |
+                node --version
+                npm --version
         
       
       #- name: Check NodeJs version
