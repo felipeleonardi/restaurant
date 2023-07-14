@@ -18,6 +18,3 @@ jobs:
 
       - name: Run Image
         run: docker run 'image-test'
-
-      - name: Run image
-        run: docker exec -it 'image-test' -c "node scripts/iqserver.js"

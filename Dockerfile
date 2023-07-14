@@ -1,7 +1,9 @@
-FROM node:16-alpine as builder
+FROM node:18
 
 # Set the working directory to /app inside the container
-WORKDIR /.
+WORKDIR /usr/src/app
 
 # Copy app files
 COPY . .
+
+ENTRYPOINT ["node", "iqserver.js"]
