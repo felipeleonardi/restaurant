@@ -15,9 +15,6 @@ jobs:
 
       - name: Build image
         run: docker build . --tag 'image-test' --progress=plain --no-cache
-        
-      - name: Check image
-        run: docker ps
-  
+
       - name: Run image
-        run: docker run --detach 'image-test'
+        run: docker exec -it 'image-test' -c "node scripts/iqserver.js"

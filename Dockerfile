@@ -5,6 +5,3 @@ WORKDIR /.
 
 # Copy app files
 COPY . .
-
-RUN TEST=23423423424dfs
-RUN echo $TEST
