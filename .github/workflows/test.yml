@@ -13,5 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Check version
-        run: java -version
+      - name: Build image
+        run: docker build --tag 'image-test'
+  
+      - name: Run image
+        run: docker run --detach 'image-test'
